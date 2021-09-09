@@ -1,0 +1,30 @@
+﻿@model homework_54.ViewModel.BrandAndCompanyViewModel
+
+@{
+
+    ViewBag.Title = "Продукт";
+    Layout = "_Layout";
+}
+<h2>Продукт</h2>
+@if (Model.Product.Image != null)
+{
+    <img src="@Model.Product.Image" alt="Product image" width="300px" />
+}
+<div class="table_section">
+    <table style="width: 100%;">
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Цена</th>
+            <th>Бренд</th>
+            <th>Категория</th>
+            
+        </tr>
+        <tr>
+            <td>@Model.Product.Id</td>
+            <td>@Model.Product.Name</td>
+            <td>@Model.Product.Price</td>
+            <td>@Model.Product.Brend.Name</td>
+        </tr>
+    </table>
+</div>

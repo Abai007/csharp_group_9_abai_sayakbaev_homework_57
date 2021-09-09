@@ -1,0 +1,44 @@
+﻿@model List<Phone>
+@{
+    ViewBag.Title = "Категории";
+    Layout = "_Layout";
+}
+<h2>Телефоны</h2>
+<a asp-action="Create" asp-controller="Products">Добавить телефон</a>
+<div class="table_section">
+
+    @if (@Model.Count == 0)
+    {
+        <p>Товары еще не добавлены</p>
+    }
+    else
+    {
+<table style="width: 100%;">
+    @foreach (var product in @Model)
+    {
+    <tr>
+        @if (product.Image != null)
+        {
+    <th>Фото</th>}
+        <th>Название</th>
+        <th>Цена</th>
+        <th>Подробная информация</th>
+        <th>Заказать</th>
+        <th>Редактировать</th>
+    </tr>
+
+    <tr>
+        @if (product.Image != null)
+        {
+    <td><img src="@product.Image" alt="Product image" width="100px" /></td>}
+        <td>@product.Name</td>
+        <td>@product.Price</td>
+        <td> <button><a asp-action="Index1" asp-route-id="@product.Id">Подробнее</a></button></td>
+        <td> <button><a asp-action="Create" asp-controller="Orders" asp-route-productId="@product.Id">Заказать</a></button></td>
+        <td><button><a asp-action="EditingProduct" asp-controller="Products" asp-route-Id="@product.Id">Редактировать</a></button></td>
+        <td><button><a asp-action="Create" asp-controller="Reviews" asp-route-Id="@product.Id">Оставить отзыв</a></button></td>
+    </tr>
+    }
+</table>
+    }
+</div>

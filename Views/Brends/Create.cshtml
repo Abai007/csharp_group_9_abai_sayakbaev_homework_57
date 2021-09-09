@@ -1,0 +1,60 @@
+﻿@model Brend
+
+
+@{
+
+    ViewBag.Title = "Добавить Бренд";
+
+    Layout = "_Layout";
+
+}
+
+
+<h2>Укажите название бренда</h2>
+
+<div class="row">
+
+    <div class="brend_add_form col-md-6">
+
+        <form asp-action="Create" method="post">
+
+            <div class="form_row">
+
+                <label for="">
+
+                    Название
+
+                    <input asp-for="Name" type="text">
+                    <span asp-validation-for="Name"></span>
+
+                </label>
+                <label for="">
+
+                    Email
+
+                    <input asp-for="Email" type="email">
+
+                </label>
+                <label for="">
+
+                    Дата основания компание
+
+                    <input asp-for="DataOfCreate" type="date">
+                    <span asp-validation-for="DataOfCreate"></span>
+
+                </label>
+                
+
+            </div>
+
+            <button type="submit">Создать</button>
+
+        </form>
+    @section Scripts
+    {
+       @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+    </div>
+</div>

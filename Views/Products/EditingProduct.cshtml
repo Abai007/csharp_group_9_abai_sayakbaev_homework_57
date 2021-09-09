@@ -1,0 +1,38 @@
+﻿@model homework_54.ViewModel.BrandAndCompanyViewModel
+@{ ViewData["Title"] = "Edit";
+                Layout = "_Layout"; }
+
+
+<h2>Product № @Model.Product.Id</h2>
+@using (Html.BeginForm("EditingProduct", "Products", FormMethod.Post))
+{
+<fieldset>
+    @Html.HiddenFor(m => m.Product.Id)
+    <p>
+        @Html.LabelFor(m => m.Product.Name, "Name")
+        <br />
+        @Html.EditorFor(m => m.Product.Name)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Product.Price, "Price")
+        <br />
+        @Html.EditorFor(m => m.Product.Price)
+
+    </p>
+
+    <p>
+        @Html.LabelFor(m => m.Product.Image, "Picture Url")
+        <br />
+        @Html.EditorFor(m => m.Product.Image)
+    </p>
+    <p>
+        <label asp-for="Product.Brend"></label>
+        <select asp-for="Product.BrendId" asp-items="ViewBag.brands"></select>
+    </p>
+    <p><input type="submit" value="Отправить" /></p>
+</fieldset>
+                @section Scripts
+    {
+                    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+                }
+                        }

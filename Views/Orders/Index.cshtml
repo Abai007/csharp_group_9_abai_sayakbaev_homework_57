@@ -1,0 +1,60 @@
+﻿@model List<Order>
+@{
+    ViewData["Title"] = "Orders";
+
+    Layout = "_Layout";
+}
+<h2>Index</h2>
+
+<div>
+    @if (@Model.Count == 0)
+
+    {
+
+        <p>Order not yet added</p>
+
+    }
+
+    <table class="table">
+
+
+        <tr>
+
+            <th>Name</th>
+
+            <th>Address</th>
+
+            <th>Contact Phone</th>
+
+            <th>Product</th>
+            <th></th>
+
+
+        </tr>
+
+        @foreach (var item in @Model)
+
+        {
+
+            <tr>
+
+                <td>@item.Name</td>
+
+                <td>@item.Address</td>
+
+                <td>@item.ContactPhone</td>
+
+                <td>@item.Product.Name</td>
+
+
+
+            </tr>
+
+        }
+
+
+
+    </table>
+
+
+</div>

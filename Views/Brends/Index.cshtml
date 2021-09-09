@@ -1,0 +1,43 @@
+﻿@model List<Brend>
+@{
+    ViewBag.Title = "Бренды";
+    Layout = "_Layout";
+}
+<h2>Бренды</h2>
+<a asp-action="Create" asp-controller="Brends">Добавить бренд</a>
+<div class="table_section">
+
+    @if (@Model.Count == 0)
+    {
+<p>Бренды еще не добавлены</p> }
+            else
+            {
+<table style="width: 100%;">
+    <tr>
+        <th>Id</th>
+        <th>Название</th>
+        <th>Email</th>
+        <th>Дата создание</th>
+    </tr>
+    @foreach (var brand in @Model)
+    {
+<tr>
+    <td>@brand.Id</td>
+    <td>@brand.Name</td>
+    <td>@brand.Email</td>
+    <td>@brand.DataOfCreate</td>
+    <td>
+        @using (Html.BeginForm("Delete", "Brends", new { id = @brand.Id }))
+        {
+<button type="submit">Delete</button>}
+    </td>
+    <td>
+        <a asp-action="Editing" asp-controller="Brends" asp-route-Id="@brand.Id">Редактиравать</a>
+    </td>
+</tr>}
+</table>
+                @section Scripts
+    {
+                    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+                }}
+</div>

@@ -1,0 +1,41 @@
+﻿@model homework_54.ViewModel.BrandAndCompanyViewModel
+@{
+    ViewBag.Title = "Добавить продукт";
+
+    Layout = "_Layout";
+
+}
+<h2>Заполните форму для добавления продуктов</h2>
+<div class="row">
+    <div class="phone_add_form col-md-6">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Product.Id" />
+            <div class="form_row">
+                <label for="">
+                    Наименование
+                    <input asp-for="Product.Name" type="text" required>
+                </label>
+            </div>
+            <div class="form_row">
+                <label for="">
+                    Цена
+                    <input asp-for="Product.Price" type="number" required>
+                </label>
+            </div>
+            <div class="form_row">
+                <label for="">
+                    Выберите фото
+                    <input type="file" name="uploadedFile" required />
+                </label>
+            </div>
+            <div>
+                <label for="">
+                    Бренд телефона
+                    <select asp-for="Product.BrendId" asp-items="ViewBag.brands"></select>
+                </label>
+            </div>
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+</div>
