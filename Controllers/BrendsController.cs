@@ -1,4 +1,5 @@
 ﻿using homework_54.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -36,10 +37,12 @@ namespace homework_54.Controllers
             List<Brend> brends = _db.Brends.ToList();
             return View(brends);
         }
+        [Authorize(Roles = "user")]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "user")]
         [HttpPost]
         public IActionResult Delete(int id)
         {

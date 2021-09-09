@@ -1,5 +1,6 @@
 ﻿using homework_54.Models;
 using homework_54.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,12 +24,12 @@ namespace homework_54.Controllers
             _db = db;
             _appEnvironment = appEnvironment;
         }
-
         public IActionResult Index()
         {
             List<Phone> products = _db.Products.ToList();
             return View(products);
         }
+        [Authorize(Roles = "user")]
         public IActionResult Index1(int id)
         {
             var viewModel = new BrandAndCompanyViewModel();
@@ -36,6 +37,7 @@ namespace homework_54.Controllers
             viewModel.Product.Brend = _db.Brends.FirstOrDefault(e => e.Id == viewModel.Product.BrendId);
             return View(viewModel);
         }
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             brands = _db.Brends.ToList();
@@ -52,6 +54,7 @@ namespace homework_54.Controllers
             ImageModel file = new ImageModel { Name = uploadedFile.FileName, Path = path, };
             return file;
         }
+        [Authorize(Roles = "admin")]
 
         [HttpPost]
         public IActionResult Create(BrandAndCompanyViewModel p, IFormFile uploadedFile)
@@ -73,7 +76,8 @@ namespace homework_54.Controllers
             return RedirectToAction("Index");
             
         }
-       public IActionResult EditingProduct(int id)
+        [Authorize(Roles = "admin")]
+        public IActionResult EditingProduct(int id)
         {
             BrandAndCompanyViewModel PCB = new BrandAndCompanyViewModel();
             brands = _db.Brends.ToList();
@@ -82,6 +86,7 @@ namespace homework_54.Controllers
             PCB.Product.Brend = _db.Brends.FirstOrDefault(p => p.Id == PCB.Product.BrendId);
             return View(PCB);
         }
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult EditingProduct(Phone product)
         {

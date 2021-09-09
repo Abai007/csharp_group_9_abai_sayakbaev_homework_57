@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using homework_54.Models;
@@ -9,9 +10,10 @@ using homework_54.Models;
 namespace homework_54.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20210909113315_CreateUser")]
+    partial class CreateUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,6 +199,13 @@ namespace homework_54.Migrations
                             Email = "admin@admin.admin",
                             Password = "qwerty123",
                             RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "user@user.user",
+                            Password = "321ytrewq",
+                            RoleId = 2
                         });
                 });
 

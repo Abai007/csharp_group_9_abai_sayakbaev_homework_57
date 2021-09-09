@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using homework_54.Models;
@@ -9,9 +10,10 @@ using homework_54.Models;
 namespace homework_54.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    partial class StoreContextModelSnapshot : ModelSnapshot
+    [Migration("20210909112836_CreateSuperUser")]
+    partial class CreateSuperUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,18 +156,6 @@ namespace homework_54.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "admin"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "user"
-                        });
                 });
 
             modelBuilder.Entity("homework_54.Models.User", b =>
@@ -189,15 +179,6 @@ namespace homework_54.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "admin@admin.admin",
-                            Password = "qwerty123",
-                            RoleId = 1
-                        });
                 });
 
             modelBuilder.Entity("homework_54.Models.Order", b =>

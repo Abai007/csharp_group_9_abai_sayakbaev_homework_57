@@ -1,4 +1,5 @@
 ﻿using homework_54.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,6 +19,7 @@ namespace homework_54.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "admin, user")]
         public IActionResult Index()
         {
             return View();
