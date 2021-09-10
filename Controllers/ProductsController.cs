@@ -24,7 +24,7 @@ namespace homework_54.Controllers
             _db = db;
             _appEnvironment = appEnvironment;
         }
-        [Authorize(Roles = "user, admin")]
+        //[Authorize(Roles = "user, admin")]
         [AllowAnonymous]
         public IActionResult Index()
         {

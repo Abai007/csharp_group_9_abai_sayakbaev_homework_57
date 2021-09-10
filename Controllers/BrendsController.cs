@@ -35,19 +35,15 @@ namespace homework_54.Controllers
 
         public IActionResult Index()
         { 
-            if(ViewBag.NameCheck != null)
-            {
                 List<Brend> brends = _db.Brends.ToList();
                 return View(brends);
-            }else
-            return RedirectToAction("Login", "Account");
         }
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
         }
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Delete(int id)
         {

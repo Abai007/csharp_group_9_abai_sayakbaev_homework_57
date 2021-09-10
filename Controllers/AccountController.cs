@@ -57,9 +57,7 @@ namespace homework_54.Controllers
                     .FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
 
                 if (user != null)
-
                 {
-                    
                     ViewBag.User = user;
                     await Authenticate(user); // аутентификация
 
@@ -107,8 +105,8 @@ namespace homework_54.Controllers
                     await _db.SaveChangesAsync();
 
                     await Authenticate(user);
-                    
-                    return RedirectToAction("Login", "Account");
+
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");

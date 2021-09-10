@@ -22,8 +22,6 @@ namespace homework_54.ViewModel
 
         public string Password { get; set; }
 
-
-
         [DataType(DataType.Password)]
 
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]

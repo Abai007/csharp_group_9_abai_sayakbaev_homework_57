@@ -1,0 +1,17 @@
+﻿@model User
+@{ ViewData["Title"] = "Editing";
+                Layout = "_Layout"; }
+
+<h2>User № @Model.Id</h2>
+@using (Html.BeginForm("Editing", "Users", FormMethod.Post))
+{
+<fieldset>
+    @Html.HiddenFor(m => m.Id)
+    <p>
+        @Html.LabelFor(m => m.Email, "Email")
+        <br />
+        @Html.EditorFor(m => m.Email)
+    </p>
+    <input type="submit" value="Сохранить" />
+</fieldset>}
+

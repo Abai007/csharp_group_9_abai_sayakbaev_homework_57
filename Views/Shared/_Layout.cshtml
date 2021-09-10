@@ -24,7 +24,10 @@
                             @if (User.Identity.Name == "admin@admin.admin")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Brends" asp-action="Index">Brends</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Brends" asp-action="Index">Brands</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Users</a>
                                 </li>
                             }
                             else
