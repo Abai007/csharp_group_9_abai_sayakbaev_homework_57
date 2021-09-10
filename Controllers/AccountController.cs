@@ -45,7 +45,7 @@ namespace homework_54.Controllers
         public async Task<IActionResult> Login(LoginViewModel model)
 
         {
-
+            
             if (ModelState.IsValid)
 
             {
@@ -59,9 +59,9 @@ namespace homework_54.Controllers
                 if (user != null)
 
                 {
+                    
                     ViewBag.User = user;
                     await Authenticate(user); // аутентификация
-
 
                     return RedirectToAction("Index", "Home");
 
@@ -70,7 +70,7 @@ namespace homework_54.Controllers
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
 
             }
-
+            
             return View(model);
 
         }
@@ -97,7 +97,6 @@ namespace homework_54.Controllers
                 User user = await _db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
                 if (user == null)
                 {
-                    // добавляем пользователя в бд
                     user = new User { Email = model.Email, Password = model.Password };
                     Role userRole = await _db.Roles.FirstOrDefaultAsync(r => r.Name == "user");
 
@@ -108,8 +107,8 @@ namespace homework_54.Controllers
                     await _db.SaveChangesAsync();
 
                     await Authenticate(user);
-
-                    return RedirectToAction("Index", "Home");
+                    
+                    return RedirectToAction("Login", "Account");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");
@@ -152,7 +151,6 @@ namespace homework_54.Controllers
                         }
 
                        );
-
         }
         public async Task<IActionResult> Logout()
 

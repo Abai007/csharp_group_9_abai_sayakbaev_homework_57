@@ -4,7 +4,11 @@
     Layout = "_Layout";
 }
 <h2>Телефоны</h2>
-<a asp-action="Create" asp-controller="Products">Добавить телефон</a>
+@if (ViewBag.NameCheck != null && ViewBag.NameCheck == "admin@admin.admin")
+{
+    <a asp-action="Create" asp-controller="Products">Добавить телефон</a>
+}
+
 <div class="table_section">
 
     @if (@Model.Count == 0)
@@ -19,12 +23,25 @@
     <tr>
         @if (product.Image != null)
         {
-    <th>Фото</th>}
+    <th>Фото</th>
+}
         <th>Название</th>
         <th>Цена</th>
-        <th>Подробная информация</th>
-        <th>Заказать</th>
-        <th>Редактировать</th>
+        @if (ViewBag.IdentityCheck)
+        {
+            @if (ViewBag.NameCheck != null && ViewBag.NameCheck == "admin@admin.admin")
+            {
+
+                <th>Редактировать</th>
+            }
+            else if (ViewBag.NameCheck != null && ViewBag.NameCheck != "admin@admin.admin")
+            {
+                <th>Подробная информация</th>
+                <th>Заказать</th>
+                <th>Оставить отзыв</th>
+            }
+        }
+
     </tr>
 
     <tr>
@@ -33,10 +50,19 @@
     <td><img src="@product.Image" alt="Product image" width="100px" /></td>}
         <td>@product.Name</td>
         <td>@product.Price</td>
-        <td> <button><a asp-action="Index1" asp-route-id="@product.Id">Подробнее</a></button></td>
-        <td> <button><a asp-action="Create" asp-controller="Orders" asp-route-productId="@product.Id">Заказать</a></button></td>
-        <td><button><a asp-action="EditingProduct" asp-controller="Products" asp-route-Id="@product.Id">Редактировать</a></button></td>
-        <td><button><a asp-action="Create" asp-controller="Reviews" asp-route-Id="@product.Id">Оставить отзыв</a></button></td>
+        @if (ViewBag.IdentityCheck)
+        {
+            @if (ViewBag.NameCheck != null && ViewBag.NameCheck == "admin@admin.admin")
+            {
+                <td><button><a asp-action="EditingProduct" asp-controller="Products" asp-route-Id="@product.Id">Редактировать</a></button></td>
+            }
+            else if (ViewBag.NameCheck != null && ViewBag.NameCheck != "admin@admin.admin")
+            {
+                <td> <button><a asp-action="Index1" asp-route-id="@product.Id">Подробнее</a></button></td>
+                <td> <button><a asp-action="Create" asp-controller="Orders" asp-route-productId="@product.Id">Заказать</a></button></td>
+                <td><button><a asp-action="Create" asp-controller="Reviews" asp-route-Id="@product.Id">Оставить отзыв</a></button></td>
+            }
+        }
     </tr>
     }
 </table>

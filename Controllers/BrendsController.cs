@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace homework_54.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class BrendsController : Controller
     {
         private StoreContext _db;
@@ -33,9 +34,13 @@ namespace homework_54.Controllers
         }
 
         public IActionResult Index()
-        {
-            List<Brend> brends = _db.Brends.ToList();
-            return View(brends);
+        { 
+            if(ViewBag.NameCheck != null)
+            {
+                List<Brend> brends = _db.Brends.ToList();
+                return View(brends);
+            }else
+            return RedirectToAction("Login", "Account");
         }
         [Authorize(Roles = "user")]
         public IActionResult Create()

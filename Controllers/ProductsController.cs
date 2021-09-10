@@ -24,8 +24,12 @@ namespace homework_54.Controllers
             _db = db;
             _appEnvironment = appEnvironment;
         }
+        [Authorize(Roles = "user, admin")]
+        [AllowAnonymous]
         public IActionResult Index()
         {
+            ViewBag.IdentityCheck = User.Identity.IsAuthenticated;
+            ViewBag.NameCheck = User.Identity.Name;
             List<Phone> products = _db.Products.ToList();
             return View(products);
         }

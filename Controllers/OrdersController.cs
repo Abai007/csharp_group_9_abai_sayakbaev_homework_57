@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace homework_54.Controllers
 {
+    [Authorize(Roles = "user")]
     public class OrdersController : Controller
     {
         private StoreContext _db;
@@ -20,16 +21,21 @@ namespace homework_54.Controllers
 
         public IActionResult Index()
         {
-            List<Order> orders = _db.Orders.Include(o => o.Product).ToList();
-            return View(orders);
-
+            if(User.Identity.Name != "admin@admin.admin")
+            {
+                List<Order> orders = _db.Orders.Include(o => o.Product).ToList();
+                return View(orders);
+            }else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+           
         }
 
 
         public IActionResult Create(int productId)
 
         {
-
             Phone product = _db.Products.FirstOrDefault(p => p.Id == productId);
             return View(new Order { Product = product });
 
